@@ -2,9 +2,7 @@
 
 import cmd
 import sys
-import logging
-import inits
-import displays
+import logging, inits, displays, start_proc
 from tools import exit_msg, open_config_file
 
 class	line_edit(cmd.Cmd):
@@ -13,15 +11,20 @@ class	line_edit(cmd.Cmd):
 
 	data = open_config_file(sys.argv[1:]);
 	tmp = data.get("programs");
-	process = {}
+	# process = {}
 
-	init = inits.taskInit()
+	# init = inits.taskInit()
 	display = displays.displaysFct()
-	process["name"] = init.createArrayProcessName(tmp)
-	process["status"] = init.createArrayProcessStatus(tmp)
-	display.displayData(process)
+	start = start_proc.start()
+	# process["name"] = init.createArrayProcessName(tmp)
+	# process["status"] = init.createArrayProcessStatus(tmp)
+	display.displayData("", tmp)
 	def emptyline(self):
 		pass
+	def	do_start(self, line):
+		self.start.startFct(line, self.tmp)
+	def	do_status(self, line):
+		self.display.displayData(line, self.tmp)
 	def do_infos(self, line):
 		self.display.displayInfos(line, self.tmp)
 	def	do_EOF(self, line):

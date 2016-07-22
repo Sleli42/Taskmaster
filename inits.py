@@ -15,8 +15,6 @@ class	taskInit:
 						ct += 1
 		except:
 			return
-				# print "name: " + nameProcess
-				# print "array[ct]: " + array[ct]
 		return array
 
 	def		createArrayProcessStatus(self, dict):
